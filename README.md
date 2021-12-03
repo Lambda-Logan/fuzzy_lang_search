@@ -46,6 +46,6 @@ Here are some typos to try:
   zhonggween
 ```
 
-Most lookups happen in under 1/10th of a millisecond (<100 μs). The entire index takes about 9 milleseconds to build and is . 
+Most lookups happen in under 1/10th of a millisecond (<100 μs). The entire index takes about 9 milleseconds to build and is only about 2.5mb. 
 
 Type ```quit``` to quit :)

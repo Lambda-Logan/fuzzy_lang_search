@@ -7,7 +7,28 @@ This is a fun little project to play with approximate search in a real-world con
 
 In this example I'm using ```senor_borroso``` to search an index of 2000-ish language names.
 
-# TRY IT OUT :-)
+# TRY IT OUT
+
+You can run it in-terminal, or in a browser localhost with webassembly.
+
+# For wasm usage:
+```
+git clone https://github.com/Lambda-Logan/fuzzy_lang_search.git
+
+cd fuzzy_lang_search
+
+wasm-pack build --target web
+
+npm install --save-dev webpack
+
+npm run serve
+```
+
+It should now be available on localhost and look something like this:
+
+![wasm usage](https://raw.githubusercontent.com/Lambda-Logan/fuzzy_lang_search/main/wasm_typo_lang_search.png)
+
+# For in-terminal usage
 
 This assumes you have ```cargo``` installed
 ```

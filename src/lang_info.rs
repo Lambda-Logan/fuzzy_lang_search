@@ -1,6 +1,7 @@
 use crate::ftzrs::*;
 use crate::hasfeatures::{HasFeatures, HasName};
-use std::rc::Rc;
+//use std::rc::Rc;
+use std::sync::Arc as Rc;
 use unidecode::unidecode;
 
 #[derive(Debug, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]

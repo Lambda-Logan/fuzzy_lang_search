@@ -5,7 +5,7 @@ use std::fs::File;
 use std::hash::{Hash, Hasher};
 use std::io::prelude::*;
 use std::path::Path;
-use std::time::Instant;
+//use std::time::Instant;
 
 #[derive(Copy, Clone, Debug)]
 pub struct Entry<Id, T> {
@@ -47,9 +47,12 @@ impl<T, Id: Ord> Ord for Entry<Id, T> {
 
 pub fn shuffle<T: Hash + Clone>(items: &[T]) -> Vec<T> {
     let mut s = DefaultHasher::new();
-    let start = Instant::now();
+    //let start = Instant::now();
+    let mut idx = 0;
     let mut make_hash = |_t: T| {
-        start.elapsed().as_nanos().hash(&mut s);
+        //start.elapsed().as_nanos().hash(&mut s);
+        (idx, _t).hash(&mut s);
+        idx += 7;
         s.finish()
     };
     let mut xs: Vec<_> = Iterator::collect(items.iter().map(|t| Entry {

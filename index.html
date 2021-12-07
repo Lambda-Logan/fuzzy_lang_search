@@ -1,0 +1,49 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <script type="module">
+        import init, { lookup } from './pkg/senor_borroso.js';
+        async function run() {
+            await init();
+            var buttonOne = document.getElementById('buttonOne');
+            buttonOne.addEventListener('click', function () {
+                var input = $("#nameInput").val();
+                alert(lookup(input));
+            }, false);
+        }
+        run();
+    </script>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <b>Fuzzy language lookup</b>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div id="ques" class="col-sm-4">Enter a language name with a few typos:</div>
+        <div class="col-sm-4"></div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-4">
+            <input type="text" id="nameInput" placeholder="enXglXish" , value="enXglXish">
+        </div>
+        <div class="col-sm-4">
+            <button class="bg-light" id="buttonOne">¡Search languages!</button>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+</html>

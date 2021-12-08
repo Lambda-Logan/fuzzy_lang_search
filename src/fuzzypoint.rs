@@ -2,7 +2,6 @@ use crate::dualiter::*;
 use crate::ftzrs::{CanGram, Feature};
 use crate::hasfeatures::HasFeatures;
 use fxhash::FxHasher64;
-use space::MetricPoint;
 use std::cell::Cell;
 use std::hash::{Hash, Hasher};
 use std::rc::Rc;
@@ -307,11 +306,5 @@ impl<P: FuzzyPoint, M: Metric<P>> HnswPoint<M, P> {
             metric: m,
             point: p,
         }
-    }
-}
-
-impl<P: FuzzyPoint, M: Metric<P>> MetricPoint for HnswPoint<M, P> {
-    fn distance(&self, rhs: &Self) -> u64 {
-        self.metric.dist(&self.point, &rhs.point) as u64
     }
 }

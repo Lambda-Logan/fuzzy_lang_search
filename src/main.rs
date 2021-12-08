@@ -8,9 +8,6 @@ use std::str;
 use std::time::{Duration, Instant};
 use unidecode::unidecode;
 
-mod testing;
-use testing::{FuzzyIndexTest, HnswTester, Testable, TrainingAtom};
-
 mod feat;
 //use feat::{
 //    book_ends, n_gram, skipgram, AnonFtzr, BookEndsFtzr, CanGram, DefaultAscii, DefaultUnicode,

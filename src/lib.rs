@@ -1,12 +1,8 @@
-use serde::{Deserialize, Serialize};
 use serde_json;
-use serde_json_wasm::from_str;
+
 use std::collections::HashMap;
 use wasm_bindgen::prelude::*;
 //use std::fmt::fmt;
-
-mod testing;
-use testing::{FuzzyIndexTest, HnswTester, Testable, TrainingAtom};
 
 mod feat;
 
@@ -100,4 +96,3 @@ pub fn lookup(s: String) -> String {
     //serde_json_wasm::to_string(&ret).unwrap()
     serde_json::to_string(&ret).unwrap()
 }
-

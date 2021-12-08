@@ -115,7 +115,7 @@ impl<P: FuzzyPoint> Metric<P> for Total {
             }
         }
         let x = (1.0 - (1.0 / dot as f64));
-        x * x
+        x * x * x
     }
 }
 

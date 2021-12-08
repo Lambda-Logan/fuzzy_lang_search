@@ -1,9 +1,9 @@
 use crate::ftzrs::*;
 use crate::hasfeatures::{HasFeatures, HasName};
 //use std::rc::Rc;
+use std::collections::HashSet;
 use std::sync::Arc as Rc;
 use unidecode::unidecode;
-
 #[derive(Debug, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub(crate) struct LangRoot {
     pub(crate) id: String,
@@ -50,25 +50,25 @@ impl LangColumn {
 }
 
 impl HasFeatures for LangColumn {
-    type Tok = u8;
+    type Tok = char;
     fn collect_features_with<F: CanGram>(&self, ftzr: &F) -> Vec<Feature> {
         let mut feats: Vec<Feature> = Vec::new();
         {
-            let mut updt = |f: Feature| feats.push(f);
-
-            match self {
-                //LangColumn::NativeName(s) => {
-                //    let chars: Vec<_> = Iterator::collect(s.native_name.chars());
-                //    ftzr.run(&chars, &mut updt);
-                //}
-                otherwise => {
-                    let words1 = otherwise.root_column().replace("(", "").replace(")", "");
-                    let words = words1.split_ascii_whitespace();
-                    for word in words {
-                        ftzr.run(word.as_bytes(), &mut updt)
-                    }
-                }
+            let mut updt = |f: Feature, by: u32| {
+                //feats.push(f.rotate(by));
+                feats.push(f);
             };
+            let mut words1 = self.root_column().replace("(", "").replace(")", "");
+            let unicode = false; //words1 != unidecode(&words1);
+            let words = words1.split_ascii_whitespace();
+            for word in words {
+                if unicode {
+                    let chars: Vec<_> = Iterator::collect(word.chars());
+                    ftzr.run(chars.as_slice(), &mut |f| updt(f, 0));
+                } else {
+                    ftzr.run(word.as_bytes(), &mut |f| updt(f, 0));
+                }
+            }
         }
         feats
     }

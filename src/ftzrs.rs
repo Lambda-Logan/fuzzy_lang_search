@@ -1,11 +1,25 @@
 use std::cmp;
 use std::fmt::Debug;
 use std::hash::{Hash, Hasher};
+use std::mem::transmute;
+use std::num::Wrapping;
 
 use fxhash::FxHasher64;
-
+type FeatSize = u32;
 #[derive(Hash, Copy, Clone, PartialEq, Ord, PartialOrd, Eq, Debug)]
-pub struct Feature(u64);
+pub struct Feature(FeatSize);
+impl Feature {
+    fn from64(n: u64) -> Self {
+        let k: [u16; 4] = unsafe { transmute(n) };
+        Feature(unsafe { transmute([k[1], k[2]]) })
+        //Feature(n)
+    }
+
+    pub(crate) fn rotate(self, n: u32) -> Self {
+        Feature(self.0.rotate_left(n))
+    }
+}
+//pub struct Feature(u64);
 
 pub trait CanGram {
     fn run<T: Sized + Hash + Debug, F: FnMut(Feature) -> ()>(&self, s: &[T], push_feat: &mut F);
@@ -53,7 +67,7 @@ impl CanGram for SkipScheme {
                             if group_b.len() != 0 {
                                 group_b.hash(&mut hasher);
                             };
-                            updt(Feature(hasher.finish()));
+                            updt(Feature::from64(hasher.finish()));
                         }
                     }
                 }
@@ -74,7 +88,7 @@ impl CanGram for SkipScheme {
                         //println!("gram: {:?}", ((x, y), &s[x..y]));
                         let mut hasher: FxHasher64 = Default::default();
                         &s[x..y].hash(&mut hasher);
-                        updt(Feature(hasher.finish()));
+                        updt(Feature::from64(hasher.finish()));
                     };
                 }
             }
@@ -108,12 +122,12 @@ pub fn skipgram(a: usize, gap: (usize, usize), b: usize) -> SkipScheme {
 
 #[derive(Hash, Copy, Clone, PartialEq, Ord, PartialOrd, Eq, Debug)]
 enum BookEnds {
-    Head(u64),
-    Toe(u64),
+    Head(FeatSize),
+    Toe(FeatSize),
 }
 
 impl BookEnds {
-    fn uniq(&self) -> u64 {
+    fn uniq(&self) -> FeatSize {
         match self {
             BookEnds::Head(i) => *i,
             BookEnds::Toe(i) => !i,

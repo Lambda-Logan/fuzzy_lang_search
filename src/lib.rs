@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use serde_json;
 use serde_json_wasm::from_str;
 use std::collections::HashMap;
 use wasm_bindgen::prelude::*;
@@ -85,15 +86,18 @@ pub fn lookup(s: String) -> String {
     let query = LangColumn::from_query(s.clone());
     let index: &FuzzyIndex<LangColumn, LangFeaturizer, SimplePoint> = &*FUZZY_INDEX;
     let results: Vec<_> = index.matches(LangColumn::from_query(s), &mut sp, &params);
-    let mut ret = "".to_string();
+    //let mut ret = "".to_string();
+    let mut ret = Vec::new();
     for r in results.into_iter().rev().take(8) {
-        ret.push_str(
-            format!(
-                "{:?}\n\n",
-                (&r.0.as_ref().english_name, &r.0.as_ref().native_name, r.1)
-            )
-            .as_str(),
-        )
+        let json = serde_json::json!({
+            "Native name         ":r.0.as_ref().native_name.clone(),
+            "English name        ":r.0.as_ref().english_name.clone(),
+            "Cosine similarity    ": format!("{:.3}", r.1)
+        });
+        ret.push(json);
     }
-    ret
+    //let v = serde::ser::Serialize(&ret);
+    //serde_json_wasm::to_string(&ret).unwrap()
+    serde_json::to_string(&ret).unwrap()
 }
+

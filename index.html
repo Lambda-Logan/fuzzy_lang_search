@@ -28,9 +28,17 @@
             await init();
             var textInput = document.getElementById('nameInput');
             const updateTable = function () {
+                var l;
                 var input = $("#nameInput").val();
                 var before = window.performance.now();
-                var l = lookup(input);
+
+                //We actually run the lookup 25 times per keystroke to be able to benchmark it
+                for (let i = 0; i < 25; i++) {
+
+                    l = lookup(input);
+
+                }
+
                 var after = window.performance.now();
 
                 var myList = JSON.parse(l);
@@ -71,8 +79,8 @@
                 buildHtmlTable(document.getElementById("results"))
 
 
-                var time = (after - before).toFixed(2);
-                document.getElementById("timing").innerText = `Lookup took ${time} milliseconds.`
+                var time = (((after - before) / 25) * 1000).toFixed(0);
+                document.getElementById("timing").innerText = `WASM lookup took ${time} microseconds (μs).`
 
             }
             textInput.addEventListener("keypress", updateTable)
@@ -91,14 +99,16 @@
         <div class="col-sm-4"></div>
     </div>
     <hr />
+
     <p>This is a fun demo to play with improving user experience through approximate nearest neighbor search on the
-        front end. It uses very fast web assembly compiled from a single rust function and everything runs in the
+        front end. It uses very fast web assembly compiled from a single rust entry point and everything runs in the
         browser. It’s actually fast enough that building the entire search index for all 1,040 language names only takes
         a few milliseconds. Feel free to contact me with any questions. All code is available <a
             href="https://github.com/Lambda-Logan/fuzzy_lang_search">on github.</a> </p>
-    <p>Even though it’s only about 9mb and lightning fast, there are still many improvements that can be made. But for
+    <p>Even though it’s only about 3mb and lightning fast, there are still many improvements that can be made. But for
         now it works very well and is VERY robust against typos!!</p>
-    <br></br>
+
+
     <div class="row">
         <div class="col-sm-2"></div>
         <div id="ques" class="col-sm-4"><b>Type a language name with with some spelling errors:</b></div>

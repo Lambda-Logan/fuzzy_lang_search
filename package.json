@@ -4,7 +4,6 @@
   "description": "a fuzzy and very fast search for language names with typos",
   "main": "index.js",
   "scripts": {
-    "deploy": "gh-pages -d dist",
     "test": "test",
     "build": "webpack",
     "serve": "webpack serve"

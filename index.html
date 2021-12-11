@@ -1,23 +1,16 @@
 <html>
 
-<style>
-    table,
-    th,
-    td {
-        border: 1px solid black;
-        border-collapse: collapse;
-        border-spacing: 5;
-    }
-
-    td {
-        padding: 5px;
-        padding-left: 100px;
-    }
-</style>
-
 <head>
-    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <!--<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" /> -->
+    <link rel="stylesheet" href="skeleton.css">
+    <style>
+        p,
+        div {
+            font-family: monospace;
+            font-size: 18px;
+        }
+    </style>
     <script type="module">
 
         //I've never written js or html before, so sorry if it's ugly! XD
@@ -94,7 +87,8 @@
     <div class="row">
         <div class="col-sm-4"></div>
         <div class="col-sm-4">
-            <b>Fuzzy language lookup with WASM</b>
+            <h2 style="color: navy"><b>Fuzzy language lookup with WASM</b></h1>
+
         </div>
         <div class="col-sm-4"></div>
     </div>
@@ -102,23 +96,34 @@
 
     <p>This is a fun demo to play with improving user experience through approximate nearest neighbor search on the
         front end. It uses very fast web assembly compiled from a single rust entry point and everything runs in the
-        browser. It’s actually fast enough that building the entire search index for all 1,040 language names only takes
-        a few milliseconds. Feel free to contact me with any questions. All code is available <a
-            href="https://github.com/Lambda-Logan/fuzzy_lang_search">on github.</a> </p>
-    <p>Even though it’s only about 3mb and lightning fast, there are still many improvements that can be made. But for
-        now it works very well and is VERY robust against typos!!</p>
+        browser. It’s actually fast enough that building the entire search index in-browser for all 1,040 language names
+        only takes a few milliseconds and it could be used to add robustness to an existing drop-down. I'm the author of
+        the rust
+        library used here for approximate search so free to contact me with any questions or if you have any ideas for a
+        fun
+        project that fast fuzzy search could be used for 😀.
+    </p>
+
+    <p>All
+        code is available <a href="https://github.com/Lambda-Logan/fuzzy_lang_search">on github.</a></p>
+    <p>All wasm data and assets are only about 862kB. There are (obviously) still even further improvements that can be
+        made to the
+        results. But even now it works well, is lightning fast and is VERY robust against typos!</p>
 
 
     <div class="row">
         <div class="col-sm-2"></div>
-        <div id="ques" class="col-sm-4"><b>Type a language name with with some spelling errors:</b></div>
+        <div id="ques" class="col-sm-4">
+            <h5 style="color: navy"><b>Type a language name with with some spelling errors:</b></h3>
+        </div>
         <div class="col-sm-4"></div>
         <div class="col-sm-2"></div>
     </div>
     <div class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-4">
-            <input type="text" id="nameInput" placeholder="enxglxish" , value="enxglxish">
+            <input style="font-family: monospace;" type="text" id="nameInput" placeholder="enxglxish" ,
+                value="enxglxish">
         </div>
         <div class="col-sm-4">
             <!-- <button class="bg-light" id="buttonOne">¡Search languages!</button> -->

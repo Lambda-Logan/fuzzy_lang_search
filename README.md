@@ -12,21 +12,21 @@ In this example I'm using ```senor_borroso``` to search an index of 2000-ish lan
 You can run it in-terminal, or in a browser localhost with webassembly.
 
 # For wasm usage:
+
+**Try it in-browser here: [Fuzzy language lookup with WASM](https://hardcore-dijkstra-1ae2b2.netlify.app/)**
+
+Or build locally
 ```
 git clone https://github.com/Lambda-Logan/fuzzy_lang_search.git
 
 cd fuzzy_lang_search
 
-wasm-pack build --target web
-
-npm install --save-dev webpack
+npm install
 
 npm run serve
 ```
 
-It should now be available on localhost and look something like this:
-
-![wasm usage](https://raw.githubusercontent.com/Lambda-Logan/fuzzy_lang_search/main/wasm_typo_lang_search.png)
+It should now be available on localhost and look something ![like this](https://raw.githubusercontent.com/Lambda-Logan/fuzzy_lang_search/main/video1918380416.mp4)
 
 # For in-terminal usage
 
@@ -44,13 +44,13 @@ This first time this is run, it will take some time to download a small number o
 
 ![repl usage](https://github.com/Lambda-Logan/fuzzy_lang_search/blob/main/fuzzy_lang_screenshot.png?raw=true)
 
-
+In terminal, most lookups happen in under 1/10th of a millisecond (<100 μs). The entire index takes about 9 milleseconds to build and is only about 2.5mb. 
 
 All the language data is stored in lang_info.rs.
 
 Check out the main function to see what's happening in the loop.
 
-Here are some typos to try:
+# Here are some typos to try:
 ```
   eenglish
 
@@ -67,6 +67,6 @@ Here are some typos to try:
   zhonggween
 ```
 
-Most lookups happen in under 1/10th of a millisecond (<100 μs). The entire index takes about 9 milleseconds to build and is only about 2.5mb. 
+
 
 Type ```quit``` to quit :)

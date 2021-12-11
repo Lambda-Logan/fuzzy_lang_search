@@ -97,7 +97,10 @@
     <hr />
 
     <p>This is a fun demo to play with improving user experience through approximate nearest neighbor search on the
-        front end. It uses very fast web assembly compiled from a single rust entry point and everything runs in the
+        front end. True fuzzy search often gives more intuitive results to the user than just longest sub-string. It
+        uses cosine similarity of n-grams and a reverse feature index. It's 100% powered by very fast web assembly
+        compiled from a single rust entry point and
+        everything runs in the
         browser. It’s actually fast enough that building the entire search index in-browser for all 1,040 language names
         only takes a few milliseconds and it could be used to add robustness to an existing drop-down. I'm the author of
         the rust

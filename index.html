@@ -21,10 +21,12 @@
         import init, { lookup } from './senor_borroso.js';
         async function run() {
             await init();
+            history.scrollRestoration = "manual"
             var textInput = document.getElementById('nameInput');
             const updateTable = function () {
                 var l;
                 var input = $("#nameInput").val();
+
                 var before = window.performance.now();
 
                 //We actually run the lookup 25 times per keystroke to be able to benchmark it
@@ -76,10 +78,15 @@
 
                 var time = (((after - before) / 25) * 1000).toFixed(0);
                 document.getElementById("timing").innerText = `WASM lookup took ${time} microseconds (μs).`
-
+                document.getElementById('nameInput').scrollTo()
             }
-            textInput.addEventListener("keypress", updateTable)
-            textInput.addEventListener("keydown", updateTable)
+
+            //textInput.addEventListener("keypress", updateTable)
+            //textInput.addEventListener("keydown", updateTable)
+            textInput.addEventListener("focus", updateTable)
+            //window.onclick = updateTable
+            //window.onscroll = updateTable
+            window.oninput = updateTable
         }
         run();
     </script>
@@ -145,6 +152,27 @@
     <div id="timing"></div>
     </br>
     <div id="results" style="background-color:lightgoldenrodyellow;"></div>
+    <br></br>
+    <br></br>
+
+    <br></br>
+
+    <br></br>
+
+    <br></br>
+
+    <br></br>
+
+    <br></br>
+
+    <br></br>
+
+    <br></br>
+
+    <br></br>
+
+    <br></br>
+
 </body>
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.js"
     integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>

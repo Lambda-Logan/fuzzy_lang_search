@@ -19,6 +19,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
+name = "creature_feature"
+version = "0.1.0"
+dependencies = [
+ "fxhash",
+ "ngram",
+ "ngrammatic",
+ "ngrams",
+]
+
+[[package]]
 name = "fxhash"
 version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -49,6 +59,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "ngram"
+version = "0.1.13"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bcce6b35485087e90052b1c80e704b55332221e3474697a3ec22d2b963302775"
+
+[[package]]
+name = "ngrammatic"
+version = "0.3.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bf3abe33347f4b9af82147f8d241f5451165a4b467e64fd2d30de1639007567b"
+
+[[package]]
+name = "ngrams"
+version = "1.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ad9273e27d7914b3d11aeac20a91c0da7ef1e89edc4e3825021ebb8ac3b83bf2"
+
+[[package]]
 name = "proc-macro2"
 version = "1.0.33"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -76,6 +104,7 @@ checksum = "3c9613b5a66ab9ba26415184cfc41156594925a9cf3a2057e57f31ff145f6568"
 name = "senor_borroso"
 version = "0.1.0"
 dependencies = [
+ "creature_feature",
  "fxhash",
  "lazy_static",
  "serde_json",
